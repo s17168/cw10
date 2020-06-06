@@ -11,6 +11,8 @@ using Wyklad5.Services;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Cw3WebApplication.NewFolder;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cw3WebApplication
 {
@@ -26,6 +28,9 @@ namespace Cw3WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<apbdContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("Data Source=db-mssql;Initial Catalog=s17168;Integrated Security=True")));
 
             // Uwierzytelnianie za pomoca JWT token
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

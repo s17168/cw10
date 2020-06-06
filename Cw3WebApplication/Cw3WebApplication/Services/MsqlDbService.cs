@@ -85,8 +85,8 @@ namespace Cw3WebApplication.DAL
                         IdEnrollment = Int16.Parse(dr["IdEnrollment"].ToString()),
                         Semester = Int16.Parse(dr["Semester"].ToString()),
                         IdStudy = Int16.Parse(dr["IdStudy"].ToString()),
-                        StartDate = dr["StartDate"].ToString()
-                    };
+                        StartDate = Convert.ToDateTime(dr["StartDate"].ToString())
+                };
                     return enrolment;
                 }
             }
