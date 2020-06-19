@@ -28,7 +28,7 @@ namespace Cw3WebApplication.Controllers
 
         //adding new student and enrolls him to semester
         [HttpPost]
-        [Authorize(Roles = "employee")]
+        //[Authorize(Roles = "employee")] // removed for quick debugging
         public IActionResult EnrollStudent(EnrollStudentRequest request)
         {
             var response = new EnrollStudentResponse();
@@ -46,10 +46,9 @@ namespace Cw3WebApplication.Controllers
         //promotes all students of given study name to given semester
         [HttpPost]
         [Route("promotions")]
-        [Authorize(Roles = "employee")]
+       // [Authorize(Roles = "employee")]
         public IActionResult PromoteStudents(int semester, string studies) // params not in body but in query string! 
         {
-            
             try
             {
                 _studentsDbService.PromoteStudents(semester, studies);

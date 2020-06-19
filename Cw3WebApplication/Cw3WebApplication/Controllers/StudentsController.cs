@@ -20,13 +20,7 @@ namespace Cw3WebApplication.Controllers
         [HttpGet("{id}")]
         public IActionResult GetStudent(string id)
         {
-            if (id == "1")
-            {
-                return Ok("Kowalski");
-            }
-
             var student = _dbService.GetStudent(id);
-
             return Ok(student);
         }
 

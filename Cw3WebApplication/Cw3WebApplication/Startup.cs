@@ -29,6 +29,7 @@ namespace Cw3WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IDbService, MsqlDbService>();
+            services.AddScoped<IStudentsDbService, SqlServerStudentDbService>();
             services.AddDbContext<apbdContext>(options =>
             options.UseSqlServer("Data Source=DESKTOP-H0B9S2Q\\SQLEXPRESS;Initial Catalog=apbd;Integrated Security=True"));
 
@@ -49,7 +50,6 @@ namespace Cw3WebApplication
                     });
 
             //services.AddScoped<>
-            services.AddTransient<IStudentsDbService, SqlServerStudentDbService>();
             services.AddScoped<LoggingService>();
             services.AddControllers();
 
