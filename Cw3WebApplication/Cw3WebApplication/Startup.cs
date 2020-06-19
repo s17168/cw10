@@ -28,9 +28,9 @@ namespace Cw3WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddScoped<IDbService, MsqlDbService>();
             services.AddDbContext<apbdContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("Data Source=DESKTOP-H0B9S2Q\\SQLEXPRESS;Initial Catalog=apbd;Integrated Security=True")));
+            options.UseSqlServer("Data Source=DESKTOP-H0B9S2Q\\SQLEXPRESS;Initial Catalog=apbd;Integrated Security=True"));
 
             // Uwierzytelnianie za pomoca JWT token
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -49,7 +49,6 @@ namespace Cw3WebApplication
                     });
 
             //services.AddScoped<>
-            services.AddSingleton<IDbService, MsqlDbService>();
             services.AddTransient<IStudentsDbService, SqlServerStudentDbService>();
             services.AddScoped<LoggingService>();
             services.AddControllers();

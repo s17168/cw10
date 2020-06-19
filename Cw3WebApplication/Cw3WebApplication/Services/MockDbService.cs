@@ -1,4 +1,5 @@
-﻿using Cw3WebApplication.Models;
+﻿using Cw3WebApplication.DTOs.Requests;
+using Cw3WebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,22 @@ namespace Cw3WebApplication.DAL
             _students.Add(student);
         }
 
+        public void DeleteStudent(string indexNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Student> GetAllStudents()
+        {
+            throw new NotImplementedException();
+        }
+
         public Enrollment GetEnrollment(string idStudent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Student GetStudent(string id)
         {
             throw new NotImplementedException();
         }
@@ -34,6 +50,11 @@ namespace Cw3WebApplication.DAL
         public IEnumerable<Student> GetStudents()
         {
             return _students;
+        }
+
+        public Student UpdateStudent(StudentDto studentDto, string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

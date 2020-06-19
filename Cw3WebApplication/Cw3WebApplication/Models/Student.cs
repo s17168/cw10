@@ -14,7 +14,7 @@ namespace Cw3WebApplication.Models
         public string Refreshtoken { get; set; }
 
         public virtual Enrollment IdEnrollmentNavigation { get; set; }
-        public string Studies { get; internal set; }
-        public short Semester { get; internal set; }
+        //public string Studies { get; internal set; }
+        //public short Semester { get; internal set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Cw3WebApplication.Models;
+﻿using Cw3WebApplication.DTOs.Requests;
+using Cw3WebApplication.Models;
+using Cw3WebApplication.NewFolder;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -14,9 +16,11 @@ namespace Cw3WebApplication.DAL
 
         private static string sqlConnecionStr = "Data Source=DESKTOP-H0B9S2Q\\SQLEXPRESS;Initial Catalog=apbd;Integrated Security=True";
 
-        static MsqlDbService()
+        private readonly apbdContext _dbcontext;
+        public MsqlDbService(apbdContext context)
         {
             _students = new List<Student>();
+            _dbcontext = context;
         }
 
         public void AddStudent(Student student)
@@ -49,8 +53,8 @@ namespace Cw3WebApplication.DAL
                     student.BirthDate = Convert.ToDateTime(dr["BirthDate"].ToString());
                     student.IdEnrollment = Int16.Parse(dr["IdEnrollment"].ToString());
 
-                    student.Studies = dr["Name"].ToString();
-                    student.Semester = Int16.Parse(dr["Semester"].ToString());
+                    //student.Studies = dr["Name"].ToString();
+                    //student.Semester = Int16.Parse(dr["Semester"].ToString());
 
                     _students.Add(student);
                 }
@@ -93,5 +97,46 @@ namespace Cw3WebApplication.DAL
             throw new Exception("Error fetching query from DB or student with id " + idStudent + " doesn't exist or is not enrolled"); // should not happen
         }
 
+        public Student GetStudent(string indexNumber)
+        {
+            var student = (Student) _dbcontext.Student.Where(d => d.IndexNumber.Equals(indexNumber)).FirstOrDefault<Student>();
+            return student;
+        }
+
+        public IEnumerable<Student> GetAllStudents()
+        {
+            var students = _dbcontext.Student.ToList();
+            return students;
+        }
+
+        public Student UpdateStudent(StudentDto studentDto, string id)
+        {
+            var existingStudent = (Student)_dbcontext.Student.FirstOrDefault<Student>();
+
+            if (studentDto.FirstName != null && studentDto.FirstName.Equals(""))
+            {
+                existingStudent.FirstName = studentDto.FirstName;
+            }
+            if (studentDto.LastName != null && studentDto.LastName.Equals(""))
+            {
+                existingStudent.LastName = studentDto.LastName;
+            }
+            if (studentDto.BirthDate != null && studentDto.BirthDate.Equals(""))
+            {
+                existingStudent.BirthDate = studentDto.BirthDate;
+            }
+            if (studentDto.IdEnrollment.Equals(""))
+            {
+                existingStudent.IdEnrollment = studentDto.IdEnrollment;
+            }
+            _dbcontext.SaveChanges();
+            return existingStudent;
+        }
+
+        public void DeleteStudent(string indexNumber)
+        {
+            var existingStudent = (Student)_dbcontext.Student.FirstOrDefault<Student>();
+            _dbcontext.Remove(existingStudent);
+        }
     }
 }

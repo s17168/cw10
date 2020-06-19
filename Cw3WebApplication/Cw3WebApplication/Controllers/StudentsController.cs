@@ -2,6 +2,7 @@ using System;
 using Cw3WebApplication.Models;
 using Cw3WebApplication.DAL;
 using Microsoft.AspNetCore.Mvc;
+using Cw3WebApplication.DTOs.Requests;
 
 namespace Cw3WebApplication.Controllers
 {
@@ -17,23 +18,22 @@ namespace Cw3WebApplication.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetStudent(int id)
+        public IActionResult GetStudent(string id)
         {
-            if (id == 1)
+            if (id == "1")
             {
                 return Ok("Kowalski");
             }
-            else if (id == 2) {
-                return Ok("Malewski");
-            }
 
-            return NotFound("Nie znaleziono podanego studenta");
+            var student = _dbService.GetStudent(id);
+
+            return Ok(student);
         }
 
         [HttpGet]
         public IActionResult GetStudents([FromQuery] string orderBy)
         {
-            return Ok(_dbService.GetStudents());
+            return Ok(_dbService.GetAllStudents());
         }
 
         [HttpPost]
@@ -46,19 +46,17 @@ namespace Cw3WebApplication.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult UpdateStudent(Student student, string id)
+        public IActionResult UpdateStudent(StudentDto studentDto, string id)
         {
-            var studentId = student.IndexNumber;
-            // update student
-
+            var studentId = studentDto.IndexNumber; // should check if id is actually correct index number
+            _dbService.UpdateStudent(studentDto, id);
             return Ok("Akutalizacja dokonczona dla studenta " + studentId);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteStudent(int id)
+        public IActionResult DeleteStudent(string id)
         {
-            // check if student exists
-
+            _dbService.DeleteStudent(id);
             return Ok("Usuwanie ukonczone dla studenta id = " + id);
         }
 

@@ -1,4 +1,6 @@
-﻿using Cw3WebApplication.Models;
+﻿using Cw3WebApplication.DTOs.Requests;
+using Cw3WebApplication.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,10 @@ namespace Cw3WebApplication.DAL
         void AddStudent(Student student);
 
         Enrollment GetEnrollment(string idStudent);
+        Student GetStudent(string id);
+        IEnumerable<Student> GetAllStudents();
+        Student UpdateStudent(StudentDto studentDto, string id);
 
+        void DeleteStudent(string indexNumber);
     }
 }
