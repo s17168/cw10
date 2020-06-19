@@ -34,6 +34,10 @@ VALUES (5, 4, 4, CAST('2019/10/01 15:00:00' AS DATETIME))
 INSERT INTO Enrollment (IdEnrollment, Semester, IdStudy, StartDate)
 VALUES (6, 4, 4, CAST('2019/10/01 15:00:00' AS DATETIME))
 
+
+
+
+
 -- Insert data into Student
 INSERT INTO Student (IndexNumber, FirstName, LastName, BirthDate, IdEnrollment, HashedPassword, Salt, Refreshtoken)
 VALUES('s202001', 'Pam', 'Beesly', CAST('1990/08/01' AS DATE), 1, '', '', '')

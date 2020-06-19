@@ -30,7 +30,7 @@ namespace Cw3WebApplication
         {
 
             services.AddDbContext<apbdContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("Data Source=db-mssql;Initial Catalog=s17168;Integrated Security=True")));
+            options.UseSqlServer(Configuration.GetConnectionString("Data Source=DESKTOP-H0B9S2Q\\SQLEXPRESS;Initial Catalog=apbd;Integrated Security=True")));
 
             // Uwierzytelnianie za pomoca JWT token
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

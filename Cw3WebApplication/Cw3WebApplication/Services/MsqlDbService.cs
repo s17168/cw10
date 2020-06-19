@@ -12,7 +12,7 @@ namespace Cw3WebApplication.DAL
 
         private static List<Student> _students;
 
-        private static string sqlConnecionStr = "Data Source=db-mssql;Initial Catalog=s17168;Integrated Security=True";
+        private static string sqlConnecionStr = "Data Source=DESKTOP-H0B9S2Q\\SQLEXPRESS;Initial Catalog=apbd;Integrated Security=True";
 
         static MsqlDbService()
         {
